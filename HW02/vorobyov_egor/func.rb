@@ -5,7 +5,7 @@ module Func
 
   def read(arr, &block)
     res = []
-    arr.each do |el|
+    for el in arr
       res.push(block.call(el))
     end
     res
