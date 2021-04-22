@@ -5,3 +5,6 @@
 - I did my custom module `Predicates` for small functions which are incuded into module `Func`. 
   Theese small functions help us make conditionals and structure my code.
 - I created my arr and called my custom iterators on it in `index.js` with comparing default iterators of instance Array.
+
+Screenshot of results in console:
+- ![image](https://user-images.githubusercontent.com/43318298/115702971-3a9e8a80-a372-11eb-98f1-69a3062c0352.png)
