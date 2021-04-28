@@ -6,11 +6,10 @@ module LogsParser
   include Predicates
 
   def self.task_1(*logs)
-    error = ''
     logs.each do |el|
-      error = el if Predicates.has_error?(el)
+      return el if Predicates.has_error?(el)
     end
-    error
+    ''
   end
 
   def self.task_2(*logs)
