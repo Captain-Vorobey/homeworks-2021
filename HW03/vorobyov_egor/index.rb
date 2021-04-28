@@ -15,7 +15,7 @@ puts LogsParser.task_2('10.6.246.103 - - [23/Apr/2018:20:30:39 +0300] "POST /tes
                        '10.6.246.101 - - [23/Apr/2018:20:31:39 +0300] "POST /test/2/messages HTTP/1.1" 200 48 0.0290')
 
 p '-------------------------------------------------------------------------------------------------------------------------------------------'
-пше 
+
 # This action for taking logs which calling core
 core_logs = ParsingFunctions.calling_core_logs(['2018-04-23 17:17:49.7 ubuntu-xenial[14319] Debug - Calling core with action: event',
                                                 '2018-04-23 17:17:49.7 ubuntu-xenial[14319] Debug - connecting to: 10.6.246.101',

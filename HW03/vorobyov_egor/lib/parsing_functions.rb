@@ -6,7 +6,7 @@ module ParsingFunctions
     ip = el.match(/\d{2}\.\d\.\d{3}\.\d{3}/).to_s
     address = el.match(%r{\s/\w{1,}/\d/\w{1,}}).to_s
 
-    date + ' FROM: ' + ip + ' TO:' + address
+    date + ' FROM: ' + ip + ' TO:' + address.upcase
   end
 
   def self.calling_core_logs(logs)
