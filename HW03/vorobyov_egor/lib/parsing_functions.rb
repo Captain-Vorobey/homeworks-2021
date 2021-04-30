@@ -1,10 +1,14 @@
 require 'time'
 
+DATE = %r{\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4}}.freeze
+IP = /\d{2}\.\d\.\d{3}\.\d{3}/.freeze
+ADDRESS = %r{\s/\w{1,}/\d/\w{1,}}.freeze
+
 module ParsingFunctions
   def self.formatted(el)
-    date = el.match(%r{\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4}}).to_s
-    ip = el.match(/\d{2}\.\d\.\d{3}\.\d{3}/).to_s
-    address = el.match(%r{\s/\w{1,}/\d/\w{1,}}).to_s
+    date = el.match(DATE).to_s
+    ip = el.match(IP).to_s
+    address = el.match(ADDRESS).to_s
 
     date + ' FROM: ' + ip + ' TO:' + address.upcase
   end

@@ -7,7 +7,7 @@ module LogsParser
 
   def self.task_1(*logs)
     logs.each do |el|
-      return el if Predicates.has_error?(el)
+      return el if Predicates.with_error(el)
     end
     ''
   end
@@ -15,7 +15,7 @@ module LogsParser
   def self.task_2(*logs)
     arr = []
     logs.each do |el|
-      arr.push(ParsingFunctions.formatted(el)) unless Predicates.has_error?(el)
+      arr.push(ParsingFunctions.formatted(el)) unless Predicates.with_error(el)
     end
     arr
   end
@@ -24,10 +24,9 @@ module LogsParser
     0 if logs.length < 2
 
     res = []
-    new_el = ''
     logs.each_with_index do |_el, i|
-      new_el = ParsingFunctions.dates_difference(logs[i], logs[i + 1]) if logs[i + 1] != nil
-      res.push(new_el)
+      _el = ParsingFunctions.dates_difference(logs[i], logs[i + 1]) if logs[i + 1] != nil
+      res.push(_el)
     end
     res.pop
     res
