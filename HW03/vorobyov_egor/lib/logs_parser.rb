@@ -5,16 +5,16 @@ module LogsParser
   include ParsingFunctions
   include Predicates
 
-  def self.task_1(*logs)
-    logs.each do |el|
+  def self.task_1(logs)
+    logs.each_line do |el|
       return el if Predicates.with_error(el)
     end
     ''
   end
 
-  def self.task_2(*logs)
+  def self.task_2(logs)
     arr = []
-    logs.each do |el|
+    logs.each_line do |el|
       arr.push(ParsingFunctions.formatted(el)) unless Predicates.with_error(el)
     end
     arr

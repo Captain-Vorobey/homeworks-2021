@@ -4,6 +4,8 @@ DATE = %r{\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4}}.freeze
 IP = /\d{2}\.\d\.\d{3}\.\d{3}/.freeze
 ADDRESS = %r{\s/\w{1,}/\d/\w{1,}}.freeze
 
+CORE_DATE = /\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.\d{1}/.freeze
+
 module ParsingFunctions
   def self.formatted(el)
     date = el.match(DATE).to_s
@@ -17,7 +19,7 @@ module ParsingFunctions
     new_arr = []
     logs.each do |el|
       if el.include? 'Calling core with action:'
-        date = el.split(' ubuntu')[0]
+        date = el.match(CORE_DATE).to_s
         new_arr.push(date)
       end
     end
