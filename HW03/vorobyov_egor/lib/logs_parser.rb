@@ -1,13 +1,11 @@
 require_relative 'parsing_functions'
-require_relative 'predicates'
 
 module LogsParser
   include ParsingFunctions
-  include Predicates
 
   def self.task_1(logs)
     logs.each_line do |el|
-      return el if Predicates.with_error(el)
+      return el if ParsingFunctions.with_error?(el)
     end
     ''
   end
@@ -15,18 +13,17 @@ module LogsParser
   def self.task_2(logs)
     arr = []
     logs.each_line do |el|
-      arr.push(ParsingFunctions.formatted(el)) unless Predicates.with_error(el)
+      arr.push(ParsingFunctions.formatted(el)) unless ParsingFunctions.with_error?(el)
     end
     arr
   end
 
   def self.task_3(logs)
     0 if logs.length < 2
-
     res = []
-    logs.each_with_index do |_el, i|
-      _el = ParsingFunctions.dates_difference(logs[i], logs[i + 1]) if logs[i + 1] != nil
-      res.push(_el)
+    logs.each_with_index do |el, i|
+      date_diffirence = ParsingFunctions.dates_difference(el, logs[i + 1]) unless logs[i + 1].nil?
+      res.push(date_diffirence)
     end
     res.pop
     res

@@ -29,4 +29,8 @@ module ParsingFunctions
   def self.dates_difference(first, second)
     Time.parse(second) - Time.parse(first)
   end
+
+  def self.with_error?(el)
+    el.include? 'error'
+  end
 end
