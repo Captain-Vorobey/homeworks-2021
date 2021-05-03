@@ -38,5 +38,4 @@ p "arr of default class Array after map: #{map_arr}"
 my_map_arr = MyArray.new(my_arr.map do |el|
   el *= 100
 end)
-
 p my_map_arr
