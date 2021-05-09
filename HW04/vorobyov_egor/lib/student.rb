@@ -34,8 +34,8 @@ class Student < Participant
 
   def done_homeworks
     done_homeworks = []
-    @homeworks.each do |el|
-      el.status == :approved ? done_homeworks.push(el) : next
+    @homeworks.each do |homework|
+      homework.status == :approved ? done_homeworks.push(homework) : next
     end
     done_homeworks
   end
