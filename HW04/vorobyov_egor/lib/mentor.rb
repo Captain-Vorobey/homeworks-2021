@@ -3,13 +3,10 @@ require_relative 'notification'
 require_relative 'participant'
 
 class Mentor < Participant
-  attr_reader :name, :surname, :age, :students, :role, :notifications
+  attr_reader :students, :role
 
   def initialize(name, surname, age)
-    @name = name
-    @surname = surname
-    @age = age
-    @notifications = []
+    super
     @students = []
     @role = :mentor
   end
