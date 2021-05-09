@@ -6,12 +6,12 @@ class Student < Participant
   attr_reader :name, :surname, :age, :notifications, :homeworks, :role
 
   def initialize(name, surname, age)
-    @name = name,
-            @surname = surname,
-            @age = age,
-            @notifications = [],
-            @homeworks = [],
-            @role = :student
+    @name = name
+    @surname = surname
+    @age = age
+    @notifications = []
+    @homeworks = []
+    @role = :student
   end
 
   def add_answer!(_homework, mentor, comment)
@@ -20,11 +20,11 @@ class Student < Participant
 
   def to_work!(homework, mentor)
     mentor.create_notification('fix', mentor) if mentor.subscribe_to?(self)
-    homework.change_hm_status!
+    homework.status = :done
   end
 
   def to_refactor!(homework)
-    homework.reject = false
+    homework.status = :pending_review
     homework.code += ' changes'
   end
 
@@ -35,7 +35,7 @@ class Student < Participant
   def done_homeworks
     done_homeworks = []
     @homeworks.each do |el|
-      el.accept == true ? done_homeworks.push(el) : next
+      el.status == :approved ? done_homeworks.push(el) : next
     end
     done_homeworks
   end

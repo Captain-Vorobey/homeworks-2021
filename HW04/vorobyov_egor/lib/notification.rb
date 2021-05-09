@@ -12,9 +12,9 @@ class Notification
   end
 
   def mark_as_read!
-    @notifications.map! do |el|
-      el.read = true
-      el
+    @notifications.map! do |notification|
+      notification.read = true
+      notification
     end
   end
 

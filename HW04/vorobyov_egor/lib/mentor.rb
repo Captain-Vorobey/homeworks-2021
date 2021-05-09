@@ -1,3 +1,4 @@
+require_relative 'homework'
 require_relative 'notification'
 require_relative 'participant'
 
@@ -5,12 +6,12 @@ class Mentor < Participant
   attr_reader :name, :surname, :age, :students, :role, :notifications
 
   def initialize(name, surname, age)
-    @name = name,
-            @surname = surname,
-            @age = age,
-            @notifications = [],
-            @students = [],
-            @role = :mentor
+    @name = name
+    @surname = surname
+    @age = age
+    @notifications = []
+    @students = []
+    @role = :mentor
   end
 
   def subscribe_to!(student)
@@ -26,20 +27,19 @@ class Mentor < Participant
 
   def reject_to_work!(homework, student)
     student.create_notification('rejected', student)
-    homework.done = false
-    homework.reject = true
+    homework.status = :rejected
   end
 
   def accept!(homework, student)
     student.create_notification('accept', student)
-    homework.accept = true
+    homework.status = :approved
   end
 
   def subscribe_to?(student)
-    res = nil
-    @students.each do |el|
-      el == student ? res = student : next
+    subscribed = nil
+    @students.each do |_student|
+      _student == student ? subscribed = student : next
     end
-    !res.nil? ? true : false
+    !subscribed.nil? ? true : false
   end
 end
