@@ -12,11 +12,11 @@ class Student < Participant
   end
 
   def add_answer!(_homework, mentor, comment)
-    mentor.create_notification(comment, mentor) if mentor.subscribe_to?(self)
+    Notification.create_notification(comment, mentor, @notifications) if mentor.subscribe_to?(self)
   end
 
   def to_work!(homework, mentor)
-    mentor.create_notification('fix', mentor) if mentor.subscribe_to?(self)
+    Notification.create_notification('fix', mentor, @notifications) if mentor.subscribe_to?(self)
     homework.status = :done
   end
 
@@ -26,7 +26,14 @@ class Student < Participant
   end
 
   def to_check!(_homework, mentor)
-    mentor.create_notification('pending review', mentor) if mentor.subscribe_to?(self)
+    Notification.create_notification('pending review', mentor, @notifications) if mentor.subscribe_to?(self)
+  end
+
+  def mark_as_read!
+    @notifications.map! do |notification|
+      notification.read = true
+      notification
+    end
   end
 
   def done_homeworks

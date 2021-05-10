@@ -1,4 +1,4 @@
-class Participant < Notification
+class Participant
   attr_reader :name, :surname, :age, :notifications
 
   def initialize(name, surname, age)

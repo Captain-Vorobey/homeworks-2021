@@ -17,19 +17,26 @@ class Mentor < Participant
 
   def add_homework(title, code, description, student)
     homework = Homework.new(title, code, description, student)
-    student.create_notification(title, student)
+    Notification.create_notification(title, student, @notifications)
     student.homeworks.push(homework)
     homework
   end
 
   def reject_to_work!(homework, student)
-    student.create_notification('rejected', student)
+    Notification.create_notification('rejected', student, @notifications)
     homework.status = :rejected
   end
 
   def accept!(homework, student)
-    student.create_notification('accept', student)
+    Notification.create_notification('accept', student, @notifications)
     homework.status = :approved
+  end
+
+  def mark_as_read!
+    @notifications.map! do |notification|
+      notification.read = true
+      notification
+    end
   end
 
   def subscribe_to?(student)

@@ -11,18 +11,11 @@ class Notification
     self.role == role
   end
 
-  def mark_as_read!
-    @notifications.map! do |notification|
-      notification.read = true
-      notification
-    end
-  end
-
-  def create_notification(desc_notification, person)
+  def self.create_notification(desc_notification, person, notifications)
     if person.has_role? :student
-      @notifications.push(Notification.new("STUDENT notification: #{desc_notification}"))
+      notifications.push(Notification.new("STUDENT notification: #{desc_notification}"))
     elsif person.has_role? :mentor
-      @notifications.push(Notification.new("MENTOR notification: #{desc_notification}"))
+      notifications.push(Notification.new("MENTOR notification: #{desc_notification}"))
     end
   end
 end
