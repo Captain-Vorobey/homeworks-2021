@@ -7,15 +7,7 @@ class Notification
     @read = false
   end
 
-  def has_role?(role)
-    self.role == role
-  end
-
-  def self.create_notification(desc_notification, person, notifications)
-    if person.has_role? :student
-      notifications.push(Notification.new("STUDENT notification: #{desc_notification}"))
-    elsif person.has_role? :mentor
-      notifications.push(Notification.new("MENTOR notification: #{desc_notification}"))
-    end
+  def self.create_notification(desc_notification, _person, notifications)
+    notifications.push(Notification.new(desc_notification))
   end
 end

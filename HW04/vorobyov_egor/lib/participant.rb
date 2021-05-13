@@ -7,8 +7,4 @@ class Participant
     @age = age
     @notifications = []
   end
-
-  def has_role?(role)
-    self.role == role
-  end
 end
