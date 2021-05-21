@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../lib/logs_parser'
 
 RSpec.describe LogsParser do
@@ -36,28 +38,62 @@ RSpec.describe LogsParser do
   let(:third_hash) { { letters: 0, digits: 3 } }
 
   describe '.task_1' do
-    it 'should return the first string with error' do
+    it 'returns the first string with error' do
       expect(LogsParser.task_1(logs).chomp).to eq error
+    end
+
+    it 'returns an argument error when arr wasn\'n passed' do
+      expect { LogsParser.task_1 }.to raise_error(ArgumentError)
+    end
+
+    it 'returns an no method error when arr wasn\'n passed' do
+      expect { LogsParser.task_1([1, true, 'str', 4, 5]) }.to raise_error(NoMethodError)
     end
   end
 
   describe '.task_2' do
-    it 'should return an array of formatted strings containing information about post requests' do
+    it 'returns an array of formatted strings containing information about post requests' do
       expect(LogsParser.task_2(logs)).to eq res
+    end
+
+    it 'returns an argument error when arr wasn\'n passed' do
+      expect { LogsParser.task_2 }.to raise_error(ArgumentError)
+    end
+
+    it 'returns an no method error when arr wasn\'n passed' do
+      expect { LogsParser.task_2([8, false, 'str', :symbol, 5]) }.to raise_error(NoMethodError)
     end
   end
 
   describe '.task_3' do
-    it 'should return an array of duration betwenn 1st and 2nd, 2nd and 3rd and etc' do
+    it 'returns an array of duration betwenn 1st and 2nd, 2nd and 3rd and etc' do
       expect(LogsParser.task_3(time_arr)).to eq time_interval
+    end
+
+    it 'returns an argument error when arr wasn\'n passed' do
+      expect { LogsParser.task_3 }.to raise_error(ArgumentError)
+    end
+
+    it 'returns an no method error when arr wasn\'n passed' do
+      expect do
+        LogsParser.task_3([81, true, 'str111', :symbol, 32, { name: 'Egor', age: 20 }])
+      end.to raise_error(TypeError)
     end
   end
 
   describe '.task_4' do
-    it 'should return count of letters and digits of input word' do
+    it 'returns count of letters and digits of input word' do
       expect(LogsParser.task_4(first_word)).to eq first_hash
       expect(LogsParser.task_4(second_word)).to eq second_hash
       expect(LogsParser.task_4(third_word)).to eq third_hash
+    end
+
+    it 'returns an argument error when value wasn\'n passed' do
+      expect { LogsParser.task_4 }.to raise_error(ArgumentError)
+    end
+
+    it 'returns an no method error when value wasn\'n passed' do
+      expect { LogsParser.task_4(3) }.to raise_error(NoMethodError)
     end
   end
 end

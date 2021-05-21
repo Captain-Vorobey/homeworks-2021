@@ -28,25 +28,25 @@ RSpec.describe ParsingFunctions do
                '2018-04-23 17:18:38.8']
 
   describe '.formatted' do
-    it 'should return a formatted string' do
+    it 'returns a formatted string' do
       expect(ParsingFunctions.formatted(string)).to eq output_string
     end
   end
 
   describe '.calling_core_logs' do
-    it 'should return logs which calling core with action' do
+    it 'returns logs which calling core with action' do
       expect(ParsingFunctions.calling_core_logs(logs)).to eq core_logs
     end
   end
 
   describe '.dates_difference' do
-    it 'should return a difference between two dates of input' do
+    it 'returns a difference between two dates of input' do
       expect(ParsingFunctions.dates_difference(first_date, second_date)).to eq output_difference
     end
   end
 
   describe '.with_error?' do
-    it 'should return true when string has an error' do
+    it 'returns true when string has an error' do
       expect(ParsingFunctions.with_error?(error_string)).to eq true
       expect(ParsingFunctions.with_error?(no_error_string)).to eq false
     end
