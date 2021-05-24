@@ -3,11 +3,9 @@ require('../my_array')
 RSpec.describe MyArray do
   subject { MyArray.new([1, 2, 3, 4, 5]) }
 
-  let(:empty_arr) { [] }
+  let(:result_array) { [1, 2, 3, 4, 5] }
 
   describe '#select' do
-    let(:result_array) { [1, 2, 3, 4, 5] }
-
     context 'when passed valid block' do
       let(:expected_array) { [2, 4] }
 
@@ -16,13 +14,15 @@ RSpec.describe MyArray do
       end
     end
 
-    context 'when block wasn\'t given' do
+    context 'when block was not given' do
       it 'returns NoMethodError' do
         expect { subject.select }.to raise_error(NoMethodError)
       end
     end
 
     context 'when passed an empty arr' do
+      let(:empty_arr) { [] }
+
       it 'returns an empty array' do
         expect(empty_arr.select { |el| el.even? }).to be_empty
       end
@@ -38,18 +38,19 @@ RSpec.describe MyArray do
   describe '#each' do
     context 'when passed valid block' do
       it 'returns an original array' do
-        res = [1, 2, 3, 4, 5]
-        expect(subject.each { |el| el *= 100 }).to eq res
+        expect(subject.each { |el| el *= 100 }).to eq result_array
       end
     end
 
     context 'when passed an empty arr' do
+      let(:empty_arr) { [] }
+
       it 'returns an empty array' do
         expect(empty_arr.each { |el| el *= 100 }).to be_empty
       end
     end
 
-    context 'when block wasn\'t given' do
+    context 'when block was not given' do
       it 'returns NoMethodError' do
         expect { subject.each }.to raise_error(NoMethodError)
       end
@@ -58,19 +59,22 @@ RSpec.describe MyArray do
 
   describe '#map' do
     context 'when passed valid block' do
+      let(:expected_array) { [100, 200, 300, 400, 500] }
+
       it 'returns a new array' do
-        new_arr = [100, 200, 300, 400, 500]
-        expect(subject.map { |el| el *= 100 }).to eq new_arr
+        expect(subject.map { |el| el *= 100 }).to eq expected_array
       end
     end
 
-    context 'when block wasn\'t given' do
+    context 'when block was not given' do
       it 'returns NoMethodError' do
         expect { subject.map }.to raise_error(NoMethodError)
       end
     end
 
     context 'when passed an empty arr' do
+      let(:empty_arr) { [] }
+
       it 'returns an empty array' do
         expect(empty_arr.map { |el| el *= 100 }).to be_empty
       end

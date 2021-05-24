@@ -12,16 +12,6 @@ RSpec.describe LogsParser do
     LOGS
   end
 
-  let(:error) do
-    '2018-04-23 20:30:42: SSL ERROR, peer: 10.6.246.101, peer cert: , #<Puma::MiniSSL::SSL: System error: Undefined error: 0 - 0>'
-  end
-
-  let(:formatted) do
-    ['23/Apr/2018:20:30:39 +0300 FROM: 10.6.246.103 TO: /TEST/2/MESSAGES',
-     '23/Apr/2018:20:30:42 +0300 FROM: 10.6.246.101 TO: /TEST/2/RUN',
-     '23/Apr/2018:20:31:39 +0300 FROM: 10.6.246.101 TO: /TEST/2/MESSAGES']
-  end
-
   let(:time_arr) do
     ['2018-04-23 17:17:49.7',
      '2018-04-23 17:18:38.8',
@@ -30,16 +20,12 @@ RSpec.describe LogsParser do
 
   let(:time_interval) { [49.1, 1.0] }
 
-  let(:first_word) { 'hello1234' }
-  let(:second_word) { 'hello' }
-  let(:third_word) { '231!' }
-
-  let(:first_hash) { { letters: 5, digits: 4 } }
-  let(:second_hash) { { letters: 5, digits: 0 } }
-  let(:third_hash) { { letters: 0, digits: 3 } }
-
   describe '.task_1' do
     context 'when arr of logs was passed' do
+      let(:error) do
+        '2018-04-23 20:30:42: SSL ERROR, peer: 10.6.246.101, peer cert: , #<Puma::MiniSSL::SSL: System error: Undefined error: 0 - 0>'
+      end
+
       it 'returns the first string with error' do
         expect(LogsParser.task_1(logs).chomp).to eq error
       end
@@ -60,6 +46,12 @@ RSpec.describe LogsParser do
 
   describe '.task_2' do
     context 'when logs were passed' do
+      let(:formatted) do
+        ['23/Apr/2018:20:30:39 +0300 FROM: 10.6.246.103 TO: /TEST/2/MESSAGES',
+         '23/Apr/2018:20:30:42 +0300 FROM: 10.6.246.101 TO: /TEST/2/RUN',
+         '23/Apr/2018:20:31:39 +0300 FROM: 10.6.246.101 TO: /TEST/2/MESSAGES']
+      end
+
       it 'returns an array of formatted strings containing information about post requests' do
         expect(LogsParser.task_2(logs)).to eq formatted
       end
@@ -101,8 +93,16 @@ RSpec.describe LogsParser do
   end
 
   describe '.task_4' do
+    let(:first_word) { 'hello1234' }
+    let(:second_word) { 'hello' }
+    let(:third_word) { '231!' }
+
+    let(:first_hash) { { letters: 5, digits: 4 } }
+    let(:second_hash) { { letters: 5, digits: 0 } }
+    let(:third_hash) { { letters: 0, digits: 3 } }
+
     context 'when string was passed' do
-      it 'returns count of letters and digits of input word' do
+      it 'returns count of letters and digits of input word', :aggregate_failures do
         expect(LogsParser.task_4(first_word)).to eq first_hash
         expect(LogsParser.task_4(second_word)).to eq second_hash
         expect(LogsParser.task_4(third_word)).to eq third_hash
