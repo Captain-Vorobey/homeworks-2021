@@ -8,7 +8,7 @@ class MyArray
   end
 
   def each(&block)
-    @arr.each do |el|
+    for el in @arr
       block.call(el)
     end
   end

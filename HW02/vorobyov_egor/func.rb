@@ -5,7 +5,7 @@ module Func
 
   def read(arr, &block)
     res = []
-    arr.each do |el|
+    for el in arr
       res.push(block.call(el))
     end
     res
@@ -13,7 +13,7 @@ module Func
 
   def read_and_push_valid(arr, &block)
     res = []
-    arr.each do |el|
+    for el in arr
       valid(el, &block) ? res.push(valid(el, &block)) : next
     end
     res
