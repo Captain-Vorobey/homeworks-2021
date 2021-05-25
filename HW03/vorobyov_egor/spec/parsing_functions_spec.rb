@@ -6,9 +6,10 @@ RSpec.describe ParsingFunctions do
 
     let(:output_string) { '23/Apr/2018:20:30:39 +0300 FROM: 10.6.246.103 TO: /TEST/2/MESSAGES' }
 
-    context 'when string passed'
-    it 'returns a formatted string' do
-      expect(ParsingFunctions.formatted(string)).to eq output_string
+    context 'when string passed' do
+      it 'returns a formatted string' do
+        expect(ParsingFunctions.formatted(string)).to eq output_string
+      end
     end
   end
 

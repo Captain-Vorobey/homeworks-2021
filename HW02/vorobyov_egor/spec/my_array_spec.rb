@@ -7,15 +7,13 @@ RSpec.describe MyArray do
 
   describe '#select' do
     context 'when passed valid block' do
-      let(:expected_array) { [2, 4] }
-
       it 'returns an array of trueth values' do
-        expect(subject.select { |el| el.even? }).to eq expected_array
+        expect(subject.select { |el| el.even? }).to eq [2, 4]
       end
     end
 
     context 'when block was not given' do
-      it 'returns NoMethodError' do
+      it 'raises NoMethodError' do
         expect { subject.select }.to raise_error(NoMethodError)
       end
     end
@@ -51,7 +49,7 @@ RSpec.describe MyArray do
     end
 
     context 'when block was not given' do
-      it 'returns NoMethodError' do
+      it 'raises NoMethodError' do
         expect { subject.each }.to raise_error(NoMethodError)
       end
     end
@@ -67,7 +65,7 @@ RSpec.describe MyArray do
     end
 
     context 'when block was not given' do
-      it 'returns NoMethodError' do
+      it 'raises NoMethodError' do
         expect { subject.map }.to raise_error(NoMethodError)
       end
     end
