@@ -15,7 +15,6 @@ class Task
   def time_difference
     @seconds.each_cons(2) do |start_event, end_event|
       res = end_event - start_event
-      # @result << res.round(1).to_s if res.positive?
       @result << res.round(1).to_s if res.positive?
     end
     @result
@@ -30,8 +29,14 @@ class Task
       next if time.nil?
 
       time_in_sec(time)
-      time_difference
     end
-    @result
+    time_difference
+    if @result.empty?
+      '0'
+    elsif @result.size == 1
+      @result[0]
+    else
+      @result
+    end
   end
 end

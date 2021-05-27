@@ -1,15 +1,17 @@
 # frozen_string_literal: true
+
 require 'time'
 
-logs = <<~LOGS
-2018-04-23 17:17:49.7 ubuntu-xenial[14319] Debug - Calling core with action: event
-2018-04-23 17:17:49.7 ubuntu-xenial[14319] Debug - connecting to: 10.6.246.101
-2018-04-23 17:17:49.8 ubuntu-xenial[14319] Debug - docker event processed
-2018-04-23 17:18:19.5 ubuntu-xenial[14319] Debug - monitoring grid communication health
-2018-04-23 17:18:38.8 ubuntu-xenial[14319] Debug - Calling core with action: messages
-2018-04-23 17:18:38.8 ubuntu-xenial[14319] Debug - connecting to: 10.6.246.101
-2018-04-23 17:18:59.8 ubuntu-xenial[14319] Debug - inside docker_handle_event
-LOGS
+logs =
+  <<~LOGS
+    2018-04-23 17:17:49.7 ubuntu-xenial[14319] Debug - Calling core with action: event
+    2018-04-23 17:17:49.7 ubuntu-xenial[14319] Debug - connecting to: 10.6.246.101
+    2018-04-23 17:17:49.8 ubuntu-xenial[14319] Debug - docker event processed
+    2018-04-23 17:18:19.5 ubuntu-xenial[14319] Debug - monitoring grid communication health
+    2018-04-23 17:18:38.8 ubuntu-xenial[14319] Debug - Calling core with action: messages
+    2018-04-23 17:18:38.8 ubuntu-xenial[14319] Debug - connecting to: 10.6.246.101
+    2018-04-23 17:18:59.8 ubuntu-xenial[14319] Debug - inside docker_handle_event
+  LOGS
 
 TIME_REGEX = %r{\d{4}(-\d{2}){2}[[:space:]](\d{2}:){2}\d{2}[[:punct:]]\d}.freeze
 
@@ -28,6 +30,8 @@ def duration_count(logs)
 end
 
 def extract_core_log(logs)
+  raise ArgumentError unless logs.is_a? String
+
   logs.each_line.select { |line| line.downcase.match('calling core') }.join
 end
 

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module ArrayMethods
   refine Array do
     def my_map
       return unless block_given?
 
       new_arr = []
-      for i in 0...self.length
+      for i in 0...length
         new_arr << yield(self[i])
       end
       new_arr
@@ -14,7 +16,7 @@ module ArrayMethods
       return unless block_given?
 
       new_arr = []
-      for i in 0...self.length
+      for i in 0...length
         new_arr << self[i] if yield(self[i])
       end
       new_arr
@@ -23,8 +25,8 @@ module ArrayMethods
     def my_each
       return unless block_given?
 
-      for i in 0...self.length
-        yield(self[i])
+      for i in 0...length
+        self[i] = yield(self[i])
       end
       self
     end

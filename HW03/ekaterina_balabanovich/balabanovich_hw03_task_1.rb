@@ -8,6 +8,8 @@ logs = <<~LOGS
 LOGS
 
 def error_extract(logs)
+  raise ArgumentError unless logs.is_a? String
+
   error = ''
   logs.each_line do |line|
     if line.match('error')

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 load 'my_array_methods.rb'
-using Arraymethod
+using MyArrayMethods
 array = [1, 2, 3, 4, 5, 6]
 array.my_each { |element| p element }
 puts '========'

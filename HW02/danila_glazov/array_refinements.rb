@@ -19,9 +19,10 @@ module ArrayRefinements
         (0...length).each do |i|
           new_arr.push yield self[i]
         end
+        return new_arr
       end
 
-      new_arr
+      self
     end
 
     def my_select
@@ -30,9 +31,10 @@ module ArrayRefinements
         (0...length).each do |i|
           new_arr.push self[i] if yield self[i]
         end
+        return new_arr
       end
 
-      new_arr
+      self
     end
   end
 end

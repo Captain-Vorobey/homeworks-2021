@@ -5,8 +5,10 @@ module MyArrayMethods
   refine Array do
     def my_each
       for i in 0...size
-        yield(self[i])
+        yield(self[i]) if block_given?
       end
+
+      self
     end
 
     def my_select
@@ -14,6 +16,7 @@ module MyArrayMethods
       for i in 0...size
         new_array << self[i] if yield(self[i])
       end
+
       new_array
     end
 
@@ -22,6 +25,7 @@ module MyArrayMethods
       for i in 0...size
         new_array << yield(self[i])
       end
+
       new_array
     end
   end

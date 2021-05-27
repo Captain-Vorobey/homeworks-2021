@@ -6,10 +6,10 @@ DAY_SECS = 86_400
 HOUR_SECS = 3600
 MIN_SECS = 60
 
-def dup_events(lines)
+def core_events(lines)
   events = lines.map.with_object([]) do |line, arr|
-    msg = line.split('-').last.strip
-    arr << msg
+    msg = line.split('-').last.split(':').first.strip
+    arr << msg if msg == 'Calling core with action'
   end
 
   events.select { |event| events.count(event) > 1 }.uniq
@@ -30,7 +30,7 @@ end
 
 def task3(logs)
   lines = logs.split("\n")
-  dups = dup_events(lines)
+  dups = core_events(lines)
 
   return '0' if dups.empty?
 
