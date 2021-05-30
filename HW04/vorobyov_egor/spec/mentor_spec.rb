@@ -6,9 +6,9 @@ RSpec.describe Mentor do
   let(:mentor) { Mentor.new('Boris', 'Tsarikov', 20) }
 
   describe '#add_homework' do
-    let(:homeworks) { student.homeworks }
-
     context 'when mentor added new homework to students' do
+      let(:homeworks) { student.homeworks }
+
       it 'returns a homework' do
         allow(Homework).to receive(:new).with(title: 'title', description: 'desc',
                                               student: double('student')).and_call_original
